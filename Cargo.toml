@@ -1,0 +1,9 @@
+[package]
+
+name = "fluidsynth"
+version = "0.0.1"
+authors = ["Anna Scholtz <anna@scholtzan.net>"]
+license = "LGPL"
+description = "FluidSynth bindings"
+repository = "https://github.com/scholtzan/rust-fluidsynth"
+
