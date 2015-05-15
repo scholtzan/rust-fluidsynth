@@ -1,8 +1,11 @@
 language: rust
 
-before_install:
-  - brew update 
-  - brew install fluidsynth pkg-config   
+env:
+  global:
+    - LD_LIBRARY_PATH=/usr/local/lib
+
+install:
+  - sudo apt-get install fluidsynth   
     
 script:
   - cargo build --verbose
