@@ -8,5 +8,5 @@ install:
   - sudo apt-get install fluidsynth   
     
 script:
-  - cargo build --verbose
+  - cargo build
 
