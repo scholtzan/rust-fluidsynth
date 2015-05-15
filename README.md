@@ -10,7 +10,7 @@ FluidSynth website [here](http://fluidsynth.elementsofsound.org/).
 
 ## Installation
 
-To use `rust-fluidsynth` you must install FluidSynth on your computer and add this to your game's `Cargo.toml`:
+To use `rust-fluidsynth` you must install FluidSynth on your computer and add this to `Cargo.toml`:
 
 ```toml
 [dependencies.fluidsynth]
