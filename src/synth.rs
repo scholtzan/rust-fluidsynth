@@ -16,13 +16,6 @@ impl Synth {
         }
     }
 
-    pub fn delete(&self) -> i32 {
-        unsafe { 
-            let res = delete_fluid_synth(self.c_fluid_synth);
-            res as i32
-        }
-    }
-
     pub fn sfload(&self, filename: &str, reset_presets: i32) -> i32 {
         unsafe {
             let bytes = String::from_str(filename).into_bytes() + b"\0";
@@ -52,3 +45,12 @@ impl Synth {
         self.c_fluid_synth
     }
 }
+
+impl Drop for Synth {
+    fn drop(&mut self) -> () {
+        unsafe {
+            delete_fluid_synth(self.c_fluid_synth);
+        }
+    }
+}
+

@@ -58,6 +58,7 @@ impl Settings {
         }
     }
 
+    // TODO
     pub fn copystr(&self, name: &str, mut string: &mut String, length: i32) -> bool {
         unsafe {
             let name_str = CString::new(name).unwrap().as_ptr();
@@ -70,9 +71,10 @@ impl Settings {
         }
     }
 
+    // TODO
     pub fn getstr(&self, name: &str) -> Option<String>{
         unsafe {
-            let length = 50;
+            let length = 100;
             let mut s = String::with_capacity(length);
 
             let res = self.copystr(name, &mut s, length as i32);
@@ -215,13 +217,14 @@ impl Settings {
             fluid_settings_foreach_option(self.to_raw(), name_str, user_data, foreach_option_callback_wrapper::<T>);  
         }
 
-        fn foreach_option_callback_wrapper<T>(closure: *mut c_void, name: *const c_char, option: *const c_char)
+        extern fn foreach_option_callback_wrapper<T>(closure: *mut c_void, name: *const c_char, option: *const c_char)
             where T: Fn(&str, &str) {
             let closure = closure as *mut T;
 
             unsafe {
                 let name_str = str::from_utf8(CStr::from_ptr(name).to_bytes()).unwrap();
                 let option_str = str::from_utf8(CStr::from_ptr(option).to_bytes()).unwrap();
+
                 (*closure)(name_str, option_str);
             }
         }
@@ -262,7 +265,7 @@ impl Settings {
             fluid_settings_foreach(self.to_raw(), user_data, foreach_callback_wrapper::<T>);  
         }
 
-        fn foreach_callback_wrapper<T>(closure: *mut c_void, name: *const c_char, setting_type: c_int)
+        extern fn foreach_callback_wrapper<T>(closure: *mut c_void, name: *const c_char, setting_type: c_int)
             where T: Fn(&str, SettingsType) {
             let closure = closure as *mut T;
 

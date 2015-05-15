@@ -31,7 +31,6 @@ pub type __mbstate_t = Union_Unnamed1;
 pub type __darwin_mbstate_t = __mbstate_t;
 pub type __darwin_ptrdiff_t = ::libc::c_long;
 pub type __darwin_size_t = ::libc::c_ulong;
-pub type __darwin_va_list = __builtin_va_list;
 pub type __darwin_wchar_t = ::libc::c_int;
 pub type __darwin_rune_t = __darwin_wchar_t;
 pub type __darwin_wint_t = ::libc::c_int;
@@ -186,7 +185,7 @@ pub type __darwin_uuid_string_t = [::libc::c_char; 37usize];
 pub type __darwin_nl_item = ::libc::c_int;
 pub type __darwin_wctrans_t = ::libc::c_int;
 pub type __darwin_wctype_t = __uint32_t;
-pub type va_list = __darwin_va_list;
+
 pub type size_t = __darwin_size_t;
 pub type fpos_t = __darwin_off_t;
 #[repr(C)]
@@ -282,22 +281,7 @@ pub enum Struct__fluid_rampreset_t { }
 pub type fluid_rampreset_t = Struct__fluid_rampreset_t;
 pub type fluid_istream_t = ::libc::c_int;
 pub type fluid_ostream_t = ::libc::c_int;
-pub type Enum_fluid_types_enum = ::libc::c_int;
-pub const FLUID_NO_TYPE: ::libc::c_int = -1;
-pub const FLUID_NUM_TYPE: ::libc::c_int = 0;
-pub const FLUID_INT_TYPE: ::libc::c_int = 1;
-pub const FLUID_STR_TYPE: ::libc::c_int = 2;
-pub const FLUID_SET_TYPE: ::libc::c_int = 3;
-pub type fluid_settings_foreach_option_t =
-    ::std::option::Option<extern "C" fn
-                              (data: *mut ::libc::c_void,
-                               name: *mut ::libc::c_char,
-                               option: *mut ::libc::c_char) -> ()>;
-pub type fluid_settings_foreach_t =
-    ::std::option::Option<extern "C" fn
-                              (data: *mut ::libc::c_void,
-                               name: *mut ::libc::c_char,
-                               _type: ::libc::c_int) -> ()>;
+
 #[repr(C)]
 #[derive(Copy)]
 pub struct Struct__fluid_synth_channel_info_t {
@@ -539,90 +523,7 @@ pub struct Struct__fluid_mod_t {
     pub amount: ::libc::c_double,
     pub next: *mut fluid_mod_t,
 }
-impl ::std::default::Default for Struct__fluid_mod_t {
-    fn default() -> Struct__fluid_mod_t { unsafe { ::std::mem::zeroed() } }
-}
-pub type Enum_fluid_mod_flags = ::libc::c_uint;
-pub const FLUID_MOD_POSITIVE: ::libc::c_uint = 0;
-pub const FLUID_MOD_NEGATIVE: ::libc::c_uint = 1;
-pub const FLUID_MOD_UNIPOLAR: ::libc::c_uint = 0;
-pub const FLUID_MOD_BIPOLAR: ::libc::c_uint = 2;
-pub const FLUID_MOD_LINEAR: ::libc::c_uint = 0;
-pub const FLUID_MOD_CONCAVE: ::libc::c_uint = 4;
-pub const FLUID_MOD_CONVEX: ::libc::c_uint = 8;
-pub const FLUID_MOD_SWITCH: ::libc::c_uint = 12;
-pub const FLUID_MOD_GC: ::libc::c_uint = 0;
-pub const FLUID_MOD_CC: ::libc::c_uint = 16;
-pub type Enum_fluid_mod_src = ::libc::c_uint;
-pub const FLUID_MOD_NONE: ::libc::c_uint = 0;
-pub const FLUID_MOD_VELOCITY: ::libc::c_uint = 2;
-pub const FLUID_MOD_KEY: ::libc::c_uint = 3;
-pub const FLUID_MOD_KEYPRESSURE: ::libc::c_uint = 10;
-pub const FLUID_MOD_CHANNELPRESSURE: ::libc::c_uint = 13;
-pub const FLUID_MOD_PITCHWHEEL: ::libc::c_uint = 14;
-pub const FLUID_MOD_PITCHWHEELSENS: ::libc::c_uint = 16;
-pub type Enum_fluid_gen_type = ::libc::c_uint;
-pub const GEN_STARTADDROFS: ::libc::c_uint = 0;
-pub const GEN_ENDADDROFS: ::libc::c_uint = 1;
-pub const GEN_STARTLOOPADDROFS: ::libc::c_uint = 2;
-pub const GEN_ENDLOOPADDROFS: ::libc::c_uint = 3;
-pub const GEN_STARTADDRCOARSEOFS: ::libc::c_uint = 4;
-pub const GEN_MODLFOTOPITCH: ::libc::c_uint = 5;
-pub const GEN_VIBLFOTOPITCH: ::libc::c_uint = 6;
-pub const GEN_MODENVTOPITCH: ::libc::c_uint = 7;
-pub const GEN_FILTERFC: ::libc::c_uint = 8;
-pub const GEN_FILTERQ: ::libc::c_uint = 9;
-pub const GEN_MODLFOTOFILTERFC: ::libc::c_uint = 10;
-pub const GEN_MODENVTOFILTERFC: ::libc::c_uint = 11;
-pub const GEN_ENDADDRCOARSEOFS: ::libc::c_uint = 12;
-pub const GEN_MODLFOTOVOL: ::libc::c_uint = 13;
-pub const GEN_UNUSED1: ::libc::c_uint = 14;
-pub const GEN_CHORUSSEND: ::libc::c_uint = 15;
-pub const GEN_REVERBSEND: ::libc::c_uint = 16;
-pub const GEN_PAN: ::libc::c_uint = 17;
-pub const GEN_UNUSED2: ::libc::c_uint = 18;
-pub const GEN_UNUSED3: ::libc::c_uint = 19;
-pub const GEN_UNUSED4: ::libc::c_uint = 20;
-pub const GEN_MODLFODELAY: ::libc::c_uint = 21;
-pub const GEN_MODLFOFREQ: ::libc::c_uint = 22;
-pub const GEN_VIBLFODELAY: ::libc::c_uint = 23;
-pub const GEN_VIBLFOFREQ: ::libc::c_uint = 24;
-pub const GEN_MODENVDELAY: ::libc::c_uint = 25;
-pub const GEN_MODENVATTACK: ::libc::c_uint = 26;
-pub const GEN_MODENVHOLD: ::libc::c_uint = 27;
-pub const GEN_MODENVDECAY: ::libc::c_uint = 28;
-pub const GEN_MODENVSUSTAIN: ::libc::c_uint = 29;
-pub const GEN_MODENVRELEASE: ::libc::c_uint = 30;
-pub const GEN_KEYTOMODENVHOLD: ::libc::c_uint = 31;
-pub const GEN_KEYTOMODENVDECAY: ::libc::c_uint = 32;
-pub const GEN_VOLENVDELAY: ::libc::c_uint = 33;
-pub const GEN_VOLENVATTACK: ::libc::c_uint = 34;
-pub const GEN_VOLENVHOLD: ::libc::c_uint = 35;
-pub const GEN_VOLENVDECAY: ::libc::c_uint = 36;
-pub const GEN_VOLENVSUSTAIN: ::libc::c_uint = 37;
-pub const GEN_VOLENVRELEASE: ::libc::c_uint = 38;
-pub const GEN_KEYTOVOLENVHOLD: ::libc::c_uint = 39;
-pub const GEN_KEYTOVOLENVDECAY: ::libc::c_uint = 40;
-pub const GEN_INSTRUMENT: ::libc::c_uint = 41;
-pub const GEN_RESERVED1: ::libc::c_uint = 42;
-pub const GEN_KEYRANGE: ::libc::c_uint = 43;
-pub const GEN_VELRANGE: ::libc::c_uint = 44;
-pub const GEN_STARTLOOPADDRCOARSEOFS: ::libc::c_uint = 45;
-pub const GEN_KEYNUM: ::libc::c_uint = 46;
-pub const GEN_VELOCITY: ::libc::c_uint = 47;
-pub const GEN_ATTENUATION: ::libc::c_uint = 48;
-pub const GEN_RESERVED2: ::libc::c_uint = 49;
-pub const GEN_ENDLOOPADDRCOARSEOFS: ::libc::c_uint = 50;
-pub const GEN_COARSETUNE: ::libc::c_uint = 51;
-pub const GEN_FINETUNE: ::libc::c_uint = 52;
-pub const GEN_SAMPLEID: ::libc::c_uint = 53;
-pub const GEN_SAMPLEMODE: ::libc::c_uint = 54;
-pub const GEN_RESERVED3: ::libc::c_uint = 55;
-pub const GEN_SCALETUNE: ::libc::c_uint = 56;
-pub const GEN_EXCLUSIVECLASS: ::libc::c_uint = 57;
-pub const GEN_OVERRIDEROOTKEY: ::libc::c_uint = 58;
-pub const GEN_PITCH: ::libc::c_uint = 59;
-pub const GEN_LAST: ::libc::c_uint = 60;
+
 #[repr(C)]
 #[derive(Copy)]
 pub struct Struct__fluid_gen_t {
@@ -631,196 +532,10 @@ pub struct Struct__fluid_gen_t {
     pub _mod: ::libc::c_double,
     pub nrpn: ::libc::c_double,
 }
-impl ::std::default::Default for Struct__fluid_gen_t {
-    fn default() -> Struct__fluid_gen_t { unsafe { ::std::mem::zeroed() } }
-}
 pub type fluid_gen_t = Struct__fluid_gen_t;
-pub type Enum_fluid_gen_flags = ::libc::c_uint;
-pub const GEN_UNUSED: ::libc::c_uint = 0;
-pub const GEN_SET: ::libc::c_uint = 1;
-pub const GEN_ABS_NRPN: ::libc::c_uint = 2;
-pub type Enum_fluid_voice_add_mod = ::libc::c_uint;
-pub const FLUID_VOICE_OVERWRITE: ::libc::c_uint = 0;
-pub const FLUID_VOICE_ADD: ::libc::c_uint = 1;
-pub const FLUID_VOICE_DEFAULT: ::libc::c_uint = 2;
-pub type __builtin_va_list = [__va_list_tag; 1usize];
-pub type __va_list_tag = Struct___va_list_tag;
-#[repr(C)]
-#[derive(Copy)]
-pub struct Struct___va_list_tag {
-    pub gp_offset: ::libc::c_uint,
-    pub fp_offset: ::libc::c_uint,
-    pub overflow_arg_area: *mut ::libc::c_void,
-    pub reg_save_area: *mut ::libc::c_void,
-}
-impl ::std::default::Default for Struct___va_list_tag {
-    fn default() -> Struct___va_list_tag { unsafe { ::std::mem::zeroed() } }
-}
+
 #[link(name = "fluidsynth")]
 extern "C" {
-    pub static mut __stdinp: *mut FILE;
-    pub static mut __stdoutp: *mut FILE;
-    pub static mut __stderrp: *mut FILE;
-    pub static sys_nerr: ::libc::c_int;
-    pub static mut sys_errlist: *const *const ::libc::c_char;
-}
-#[link(name = "fluidsynth")]
-extern "C" {
-    pub fn clearerr(arg1: *mut FILE) -> ();
-    pub fn fclose(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn feof(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn ferror(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn fflush(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn fgetc(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn fgetpos(arg1: *mut FILE, arg2: *mut fpos_t) -> ::libc::c_int;
-    pub fn fgets(arg1: *mut ::libc::c_char, arg2: ::libc::c_int,
-                 arg3: *mut FILE) -> *mut ::libc::c_char;
-    pub fn fopen(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char)
-     -> *mut FILE;
-    pub fn fprintf(arg1: *mut FILE, arg2: *const ::libc::c_char, ...)
-     -> ::libc::c_int;
-    pub fn fputc(arg1: ::libc::c_int, arg2: *mut FILE) -> ::libc::c_int;
-    pub fn fputs(arg1: *const ::libc::c_char, arg2: *mut FILE)
-     -> ::libc::c_int;
-    pub fn fread(arg1: *mut ::libc::c_void, arg2: size_t, arg3: size_t,
-                 arg4: *mut FILE) -> size_t;
-    pub fn freopen(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char,
-                   arg3: *mut FILE) -> *mut FILE;
-    pub fn fscanf(arg1: *mut FILE, arg2: *const ::libc::c_char, ...)
-     -> ::libc::c_int;
-    pub fn fseek(arg1: *mut FILE, arg2: ::libc::c_long, arg3: ::libc::c_int)
-     -> ::libc::c_int;
-    pub fn fsetpos(arg1: *mut FILE, arg2: *const fpos_t) -> ::libc::c_int;
-    pub fn ftell(arg1: *mut FILE) -> ::libc::c_long;
-    pub fn fwrite(arg1: *const ::libc::c_void, arg2: size_t, arg3: size_t,
-                  arg4: *mut FILE) -> size_t;
-    pub fn getc(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn getchar() -> ::libc::c_int;
-    pub fn gets(arg1: *mut ::libc::c_char) -> *mut ::libc::c_char;
-    pub fn perror(arg1: *const ::libc::c_char) -> ();
-    pub fn printf(arg1: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn putc(arg1: ::libc::c_int, arg2: *mut FILE) -> ::libc::c_int;
-    pub fn putchar(arg1: ::libc::c_int) -> ::libc::c_int;
-    pub fn puts(arg1: *const ::libc::c_char) -> ::libc::c_int;
-    pub fn remove(arg1: *const ::libc::c_char) -> ::libc::c_int;
-    pub fn rename(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char)
-     -> ::libc::c_int;
-    pub fn rewind(arg1: *mut FILE) -> ();
-    pub fn scanf(arg1: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn setbuf(arg1: *mut FILE, arg2: *mut ::libc::c_char) -> ();
-    pub fn setvbuf(arg1: *mut FILE, arg2: *mut ::libc::c_char,
-                   arg3: ::libc::c_int, arg4: size_t) -> ::libc::c_int;
-    pub fn sprintf(arg1: *mut ::libc::c_char,
-                   arg2: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn sscanf(arg1: *const ::libc::c_char,
-                  arg2: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn tmpfile() -> *mut FILE;
-    pub fn tmpnam(arg1: *mut ::libc::c_char) -> *mut ::libc::c_char;
-    pub fn ungetc(arg1: ::libc::c_int, arg2: *mut FILE) -> ::libc::c_int;
-    pub fn vfprintf(arg1: *mut FILE, arg2: *const ::libc::c_char,
-                    arg3: va_list) -> ::libc::c_int;
-    pub fn vprintf(arg1: *const ::libc::c_char, arg2: va_list)
-     -> ::libc::c_int;
-    pub fn vsprintf(arg1: *mut ::libc::c_char, arg2: *const ::libc::c_char,
-                    arg3: va_list) -> ::libc::c_int;
-    pub fn ctermid(arg1: *mut ::libc::c_char) -> *mut ::libc::c_char;
-    pub fn fdopen(arg1: ::libc::c_int, arg2: *const ::libc::c_char)
-     -> *mut FILE;
-    pub fn fileno(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn pclose(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn popen(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char)
-     -> *mut FILE;
-    pub fn __srget(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn __svfscanf(arg1: *mut FILE, arg2: *const ::libc::c_char,
-                      arg3: va_list) -> ::libc::c_int;
-    pub fn __swbuf(arg1: ::libc::c_int, arg2: *mut FILE) -> ::libc::c_int;
-    pub fn __sputc(_c: ::libc::c_int, _p: *mut FILE) -> ::libc::c_int;
-    pub fn flockfile(arg1: *mut FILE) -> ();
-    pub fn ftrylockfile(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn funlockfile(arg1: *mut FILE) -> ();
-    pub fn getc_unlocked(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn getchar_unlocked() -> ::libc::c_int;
-    pub fn putc_unlocked(arg1: ::libc::c_int, arg2: *mut FILE)
-     -> ::libc::c_int;
-    pub fn putchar_unlocked(arg1: ::libc::c_int) -> ::libc::c_int;
-    pub fn getw(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn putw(arg1: ::libc::c_int, arg2: *mut FILE) -> ::libc::c_int;
-    pub fn tempnam(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char)
-     -> *mut ::libc::c_char;
-    pub fn fseeko(arg1: *mut FILE, arg2: off_t, arg3: ::libc::c_int)
-     -> ::libc::c_int;
-    pub fn ftello(arg1: *mut FILE) -> off_t;
-    pub fn snprintf(arg1: *mut ::libc::c_char, arg2: size_t,
-                    arg3: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn vfscanf(arg1: *mut FILE, arg2: *const ::libc::c_char,
-                   arg3: va_list) -> ::libc::c_int;
-    pub fn vscanf(arg1: *const ::libc::c_char, arg2: va_list)
-     -> ::libc::c_int;
-    pub fn vsnprintf(arg1: *mut ::libc::c_char, arg2: size_t,
-                     arg3: *const ::libc::c_char, arg4: va_list)
-     -> ::libc::c_int;
-    pub fn vsscanf(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char,
-                   arg3: va_list) -> ::libc::c_int;
-    pub fn dprintf(arg1: ::libc::c_int, arg2: *const ::libc::c_char, ...)
-     -> ::libc::c_int;
-    pub fn vdprintf(arg1: ::libc::c_int, arg2: *const ::libc::c_char,
-                    arg3: va_list) -> ::libc::c_int;
-    pub fn getdelim(arg1: *mut *mut ::libc::c_char, arg2: *mut size_t,
-                    arg3: ::libc::c_int, arg4: *mut FILE) -> ssize_t;
-    pub fn getline(arg1: *mut *mut ::libc::c_char, arg2: *mut size_t,
-                   arg3: *mut FILE) -> ssize_t;
-    pub fn asprintf(arg1: *mut *mut ::libc::c_char,
-                    arg2: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn ctermid_r(arg1: *mut ::libc::c_char) -> *mut ::libc::c_char;
-    pub fn fgetln(arg1: *mut FILE, arg2: *mut size_t) -> *mut ::libc::c_char;
-    pub fn fmtcheck(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char)
-     -> *const ::libc::c_char;
-    pub fn fpurge(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn setbuffer(arg1: *mut FILE, arg2: *mut ::libc::c_char,
-                     arg3: ::libc::c_int) -> ();
-    pub fn setlinebuf(arg1: *mut FILE) -> ::libc::c_int;
-    pub fn vasprintf(arg1: *mut *mut ::libc::c_char,
-                     arg2: *const ::libc::c_char, arg3: va_list)
-     -> ::libc::c_int;
-    pub fn zopen(arg1: *const ::libc::c_char, arg2: *const ::libc::c_char,
-                 arg3: ::libc::c_int) -> *mut FILE;
-    pub fn funopen(arg1: *const ::libc::c_void,
-                   arg2:
-                       ::std::option::Option<extern "C" fn
-                                                 (arg1: *mut ::libc::c_void,
-                                                  arg2: *mut ::libc::c_char,
-                                                  arg3: ::libc::c_int)
-                                                 -> ::libc::c_int>,
-                   arg3:
-                       ::std::option::Option<extern "C" fn
-                                                 (arg1: *mut ::libc::c_void,
-                                                  arg2: *const ::libc::c_char,
-                                                  arg3: ::libc::c_int)
-                                                 -> ::libc::c_int>,
-                   arg4:
-                       ::std::option::Option<extern "C" fn
-                                                 (arg1: *mut ::libc::c_void,
-                                                  arg2: fpos_t,
-                                                  arg3: ::libc::c_int)
-                                                 -> fpos_t>,
-                   arg5:
-                       ::std::option::Option<extern "C" fn
-                                                 (arg1: *mut ::libc::c_void)
-                                                 -> ::libc::c_int>)
-     -> *mut FILE;
-    pub fn __sprintf_chk(arg1: *mut ::libc::c_char, arg2: ::libc::c_int,
-                         arg3: size_t, arg4: *const ::libc::c_char, ...)
-     -> ::libc::c_int;
-    pub fn __snprintf_chk(arg1: *mut ::libc::c_char, arg2: size_t,
-                          arg3: ::libc::c_int, arg4: size_t,
-                          arg5: *const ::libc::c_char, ...) -> ::libc::c_int;
-    pub fn __vsprintf_chk(arg1: *mut ::libc::c_char, arg2: ::libc::c_int,
-                          arg3: size_t, arg4: *const ::libc::c_char,
-                          arg5: va_list) -> ::libc::c_int;
-    pub fn __vsnprintf_chk(arg1: *mut ::libc::c_char, arg2: size_t,
-                           arg3: ::libc::c_int, arg4: size_t,
-                           arg5: *const ::libc::c_char, arg6: va_list)
-     -> ::libc::c_int;
     pub fn new_fluid_settings() -> *mut fluid_settings_t;
     pub fn delete_fluid_settings(settings: *mut fluid_settings_t) -> ();
     pub fn fluid_settings_get_type(settings: *mut fluid_settings_t,
@@ -883,7 +598,7 @@ extern "C" {
     pub fn fluid_settings_foreach_option(settings: *mut fluid_settings_t,
                                          name: *const ::libc::c_char,
                                          data: *mut ::libc::c_void,
-                                         func: fn (closure: *mut ::libc::c_void, name: *const ::libc::c_char, option:  *const ::libc::c_char))
+                                         func: extern fn (closure: *mut ::libc::c_void, name: *const ::libc::c_char, option:  *const ::libc::c_char))
      -> ();
     pub fn fluid_settings_option_count(settings: *mut fluid_settings_t,
                                        name: *const ::libc::c_char)
@@ -894,7 +609,7 @@ extern "C" {
      -> *mut ::libc::c_char;
     pub fn fluid_settings_foreach(settings: *mut fluid_settings_t,
                                   data: *mut ::libc::c_void,
-                                  func: fn (closure: *mut ::libc::c_void, name: *const ::libc::c_char, setting_type: ::libc::c_int)) -> ();
+                                  func: extern fn (closure: *mut ::libc::c_void, name: *const ::libc::c_char, setting_type: ::libc::c_int)) -> ();
     pub fn new_fluid_synth(settings: *mut fluid_settings_t)
      -> *mut fluid_synth_t;
     pub fn delete_fluid_synth(synth: *mut fluid_synth_t) -> ::libc::c_int;

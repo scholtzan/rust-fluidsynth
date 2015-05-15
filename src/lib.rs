@@ -15,6 +15,7 @@ pub mod event;
 pub mod seq;
 pub mod voice;
 pub mod ramsfont;
+pub mod gen;
 
 pub fn is_soundfont(filename: &str) -> bool {
     unsafe { 

@@ -81,7 +81,6 @@ impl RAMSample {
         }
     }
 
-
     pub fn to_raw(&self) -> *mut fluid_sample_t {
         self.c_fluid_sample
     }
