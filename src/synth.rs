@@ -6,7 +6,7 @@ use settings::*;
 use sfont::*;
 use std::str;
 use std::mem::*;
-use midi::*;
+use midi::MidiRouter;
 
 #[repr(C)]
 #[derive(PartialEq, Debug)]
@@ -208,7 +208,7 @@ impl Synth {
 
     pub fn get_channel_info(&self, chan: i32) -> Option<ChannelInfo> {
         unsafe {
-            let info: *mut fluid_synth_channel_info_t;
+            let info: *mut fluid_synth_channel_info_t = uninitialized();
             let res = fluid_synth_get_channel_info(self.c_fluid_synth, chan as c_int, info);
             
             if res == 0 {
