@@ -7,6 +7,7 @@ __FluidSynth__ bindings for Rust.
 Bindings for FluidSynth, a software synthesizer based on the SoundFont 2 specifications, in Rust.
 
 FluidSynth website [here](http://fluidsynth.elementsofsound.org/).
+A documentation of the FluidSynth API is available [here](http://fluidsynth.sourceforge.net/api/index.html).
 
 ## Installation
 
@@ -21,11 +22,13 @@ git = "https://github.com/scholtzan/rust-fluidsynth"
 
 ```Rust
 extern crate fluidsynth;
+extern create rand;
+extern crate time;
 
 use fluidsynth::*;
-use std::rand::{thread_rng, Rng};
-use std::old_io::Timer;
-use std::time::duration::Duration;
+use rand::{thread_rng};
+use time::duration::Duration;
+use std::thread;
 
 fn main() {
     let mut settings = settings::Settings::new();
@@ -34,13 +37,12 @@ fn main() {
     syn.sfload("/path/to/soundfont.sf2", 1);
 
     let interval = Duration::milliseconds(1000);
-    let mut timer = Timer::new().unwrap();
 
     for x in 0..12 {
         let num: i32 = thread_rng().gen_range(0, 12);
         let key = 60 + num;
         syn.noteon(0, key, 80);
-        timer.sleep(interval);
+        thread::sleep_ms(interval);
         syn.noteoff(0, key);
     }
 }

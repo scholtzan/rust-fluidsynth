@@ -7,3 +7,5 @@ license = "LGPL"
 description = "FluidSynth bindings"
 repository = "https://github.com/scholtzan/rust-fluidsynth"
 
+[dependencies]
+libc = "*"
