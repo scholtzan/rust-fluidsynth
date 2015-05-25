@@ -5,7 +5,7 @@ use std::ffi::{CString};
 
 
 pub struct RAMSoundFont {
-    c_fluid_sfont: *mut fluid_sfont_t,
+    _c_fluid_sfont: *mut fluid_sfont_t,
     c_fluid_ramsfont: *mut fluid_ramsfont_t
 }
 
@@ -14,7 +14,7 @@ impl RAMSoundFont {
         unsafe {
             let font: *mut fluid_sfont_t = fluid_ramsfont_create_sfont();
             RAMSoundFont {
-                c_fluid_sfont: font,
+                _c_fluid_sfont: font,
                 c_fluid_ramsfont: (*font).data as *mut fluid_ramsfont_t
             }
         }

@@ -1,5 +1,5 @@
 extern crate libc;
-use libc::{c_int, c_uint, c_short, c_char, c_void, c_double};
+use libc::{c_int, c_uint, c_short, c_void, c_double};
 use ffi::*;
 use synth::*;
 use event::*;
@@ -7,7 +7,6 @@ use std::ffi::{CString, CStr};
 use std::str;
 
 
-#[derive(Clone)]
 pub struct Sequencer {
     c_fluid_sequencer: *mut fluid_sequencer_t
 }

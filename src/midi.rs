@@ -1,7 +1,6 @@
 extern crate libc;
 use libc::{c_void, c_int, c_float};
 use ffi::*;
-use synth::*;
 use settings::*;
 use event::*;
 
@@ -56,13 +55,13 @@ impl Drop for MidiRouter {
 }
 
 pub enum MidiRouterRuleType {
-    NOTE = 0,
-    CC = 1,
-    PROG_CHANGE = 2,
-    PITCH_BEND = 3,
-    CHANNEL_PRESSURE = 4,
-    KEY_PRESSURE = 5,
-    COUNT = 6
+    Note = 0,
+    CC,
+    ProgChange,
+    PitchBend,
+    ChannelPressure,
+    KeyPressure,
+    Count,
 }
 
 

@@ -2,6 +2,36 @@ extern crate libc;
 use ffi::*;
 use libc::{c_int, c_uint, c_short};
 
+#[repr(C)]
+#[derive(PartialEq, Debug)]
+pub enum SeqEventType {
+    Note = 0,
+    NoteOn,
+    NoteOff,
+    AllSoundsOff,
+    AllNotesOff,
+    BankSelect,
+    ProgramChange,
+    ProgramSelect,
+    PitchBend,
+    PitchWheelSens,
+    Modulation,
+    Sustain,
+    ControlChange,
+    Pan,
+    Volume,
+    ReverbSend,
+    ChorusSend,
+    Timer,
+    AnyControlChange,
+    ChannelPressure,
+    SystemReset,
+    Unregistering,
+    LastEvent
+}
+
+
+
 pub struct Event {
     c_fluid_event: *mut fluid_event_t
 }

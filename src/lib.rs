@@ -1,8 +1,6 @@
 #![feature(libc)]
-#![feature(old_io)]
 
 extern crate libc;
-use libc::{c_int, c_char};
 use std::ffi::{CString};
 mod ffi;
 
@@ -16,6 +14,8 @@ pub mod seq;
 pub mod voice;
 pub mod ramsfont;
 pub mod gen;
+pub mod log;
+pub mod sfont;
 
 pub fn is_soundfont(filename: &str) -> bool {
     unsafe { 

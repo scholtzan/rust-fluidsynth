@@ -59,7 +59,7 @@ impl Settings {
     }
 
     // TODO
-    pub fn copystr(&self, name: &str, mut string: &mut String, length: i32) -> bool {
+    /*pub fn copystr(&self, name: &str, mut string: &mut String, length: i32) -> bool {
         unsafe {
             let name_str = CString::new(name).unwrap().as_ptr();
             let string_str = CString::new(string.clone()).unwrap().as_ptr();
@@ -69,10 +69,10 @@ impl Settings {
 
             res != 0
         }
-    }
+    }*/
 
     // TODO
-    pub fn getstr(&self, name: &str) -> Option<String>{
+    /*pub fn getstr(&self, name: &str) -> Option<String>{
         unsafe {
             let length = 100;
             let mut s = String::with_capacity(length);
@@ -84,7 +84,7 @@ impl Settings {
                 _ => None
             }
         }
-    }
+    }*/
 
     pub fn getstr_default(&self, name: &str) -> Option<String> {
         unsafe {
@@ -144,7 +144,7 @@ impl Settings {
 
     pub fn getnum_range(&self, name: &str) -> Option<(f64, f64)> {
         unsafe {
-            if (SettingsType::NoType == self.get_type(name)) {
+            if SettingsType::NoType == self.get_type(name) {
                 return None;
             }
 
@@ -195,7 +195,7 @@ impl Settings {
 
     pub fn getint_range(&self, name: &str) -> Option<(i32, i32)> {
         unsafe {
-            if (SettingsType::NoType == self.get_type(name)) {
+            if SettingsType::NoType == self.get_type(name) {
                 return None;
             }
 
@@ -274,6 +274,12 @@ impl Settings {
                 let converted_type: SettingsType = transmute(setting_type);
                 (*closure)(name_str, converted_type);
             }
+        }
+    }
+
+    pub fn from_raw(settings: *mut fluid_settings_t) -> Settings {
+        Settings {
+            c_fluid_settings: settings
         }
     }
 
