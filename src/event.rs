@@ -73,13 +73,13 @@ impl Event {
     
     }*/
 
-    pub fn noteon(&self, channel: i32, key: i32, velocity: i32) {
+    pub fn noteon(&self, channel: i32, key: i16, velocity: i16) {
         unsafe {
             fluid_event_noteon(self.to_raw(), channel as c_int, key as c_short, velocity as c_short);
         }
     }
 
-    pub fn noteoff(&self, channel: i32, key: i32) {
+    pub fn noteoff(&self, channel: i32, key: i16) {
         unsafe {
             fluid_event_noteoff(self.to_raw(), channel as c_int, key as c_short);
         }
