@@ -256,10 +256,10 @@ impl Synth {
         }
     }
 
-    pub fn sfload(&self, filename: &str, reset_presets: i32) -> bool {
+    pub fn sfload(&self, filename: &str, reset_presets: i32) -> u32 {
         unsafe {
             let filename_str = CString::new(filename).unwrap().as_ptr();
-            fluid_synth_sfload(self.c_fluid_synth, filename_str, reset_presets as c_int) == 0
+            fluid_synth_sfload(self.c_fluid_synth, filename_str, reset_presets as c_int)
         }                    
     }
 
