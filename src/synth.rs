@@ -595,6 +595,30 @@ impl Synth {
             str::from_utf8(CStr::from_ptr(fluid_synth_error(self.to_raw())).to_bytes()).unwrap()
         }
     }
+    
+    // The fluid_synth_write_* functions are not idiomatic in Rust.
+    // But what functions should we provide instead? We could write into one or 2 &mut [f32],
+    // but then the user would have to pass in initialized data, when uninitialized would work just as well
+    // (or invoke unsafe code).
+    // I (Eli Dupree) have picked this particular alternative, but I'm not confident that it's the best.
+    pub fn write_f32 (&self, len: usize, left: &mut Vec<f32>, right: &mut Vec<f32>)->bool {
+      left.reserve (len);
+      right.reserve (len);
+      let result;
+      let left_current = left.len();
+      let right_current = right.len();
+      unsafe {
+        result = fluid_synth_write_float (self.to_raw(), len as c_int,
+          left.get_unchecked_mut (left_current) as *mut f32 as *mut ::libc::c_void, 0, 1,
+          right.get_unchecked_mut (right_current) as *mut f32 as *mut ::libc::c_void, 0, 1,
+        ) == 0;
+        if result {
+          left.set_len (left_current + len);
+          right.set_len (right_current + len);
+        }
+      }
+      result
+    }
 
     // TODO
     // [...]
