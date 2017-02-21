@@ -189,9 +189,9 @@ impl Synth {
     }
 
     pub fn program_select_by_sfont_name(&self, chan: i32, sfont_name: &str, bank_num: u32, preset_num: u32) -> bool {
+        let sfont_name_str = CString::new(sfont_name).unwrap();
         unsafe {
-            let sfont_name_str = CString::new(sfont_name).unwrap().as_ptr();
-            fluid_synth_program_select_by_sfont_name(self.c_fluid_synth, chan as c_int, sfont_name_str, bank_num as c_uint, preset_num as c_uint) == 0
+            fluid_synth_program_select_by_sfont_name(self.c_fluid_synth, chan as c_int, sfont_name_str.as_ptr(), bank_num as c_uint, preset_num as c_uint) == 0
         }                          
     }
 
@@ -257,9 +257,9 @@ impl Synth {
     }
 
     pub fn sfload(&self, filename: &str, reset_presets: i32) -> Option <u32> {
+        let filename_str = CString::new(filename).unwrap();
         unsafe {
-            let filename_str = CString::new(filename).unwrap().as_ptr();
-            match fluid_synth_sfload(self.c_fluid_synth, filename_str, reset_presets as c_int) {
+            match fluid_synth_sfload(self.c_fluid_synth, filename_str.as_ptr(), reset_presets as c_int) {
                 -1 => None,
                 ID => Some (ID as u32),
             }
@@ -327,9 +327,9 @@ impl Synth {
     }
 
     pub fn get_sfont_by_name(&self, name: &str) -> Option<SoundFont> {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            let name_str = CString::new(name).unwrap().as_ptr();
-            let result = fluid_synth_get_sfont_by_name(self.to_raw(), name_str);
+            let result = fluid_synth_get_sfont_by_name(self.to_raw(), name_str.as_ptr());
 
             if result.is_null() {
                 None
@@ -514,30 +514,30 @@ impl Synth {
     }
 
     pub fn create_key_tuning(&self, bank: i32, prog: i32, name: &str, pitch: *const f64) -> bool {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            let name_str = CString::new(name).unwrap().as_ptr();
-            fluid_synth_create_key_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str, pitch as *const c_double) == 0
+            fluid_synth_create_key_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str.as_ptr(), pitch as *const c_double) == 0
         }
     }
 
     pub fn activate_key_tuning(&self, bank: i32, prog: i32, name: &str, pitch: *const f64, apply: bool) -> bool {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            let name_str = CString::new(name).unwrap().as_ptr();
-            fluid_synth_activate_key_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str, pitch as *const c_double, apply as c_int) == 0
+            fluid_synth_activate_key_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str.as_ptr(), pitch as *const c_double, apply as c_int) == 0
         }
     }
 
     pub fn create_octave_tuning(&self, bank: i32, prog: i32, name: &str, pitch: *const f64) -> bool {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            let name_str = CString::new(name).unwrap().as_ptr();
-            fluid_synth_create_octave_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str, pitch as *const c_double) == 0
+            fluid_synth_create_octave_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str.as_ptr(), pitch as *const c_double) == 0
         }
     }
 
     pub fn activate_octave_tuning(&self, bank: i32, prog: i32, name: &str, pitch: *const f64, apply: bool) -> bool {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            let name_str = CString::new(name).unwrap().as_ptr();
-            fluid_synth_activate_octave_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str, pitch as *const c_double, apply as c_int) == 0
+            fluid_synth_activate_octave_tuning(self.to_raw(), bank as c_int, prog as c_int, name_str.as_ptr(), pitch as *const c_double, apply as c_int) == 0
         }
     }
 

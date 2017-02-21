@@ -335,9 +335,9 @@ impl Player {
     }
 
     pub fn add(&self, file: &str) {
+        let file_str = CString::new(file).unwrap();
         unsafe {
-            let file_str = CString::new(file).unwrap().as_ptr();
-            fluid_player_add(self.to_raw(), file_str);
+            fluid_player_add(self.to_raw(), file_str.as_ptr());
         }
     }
 
