@@ -8,4 +8,4 @@ description = "FluidSynth bindings"
 repository = "https://github.com/scholtzan/rust-fluidsynth"
 
 [dependencies]
-libc = "*"
+libc = "0.2"
