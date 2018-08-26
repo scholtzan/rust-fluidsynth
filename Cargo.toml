@@ -3,7 +3,7 @@
 name = "fluidsynth"
 version = "0.0.1"
 authors = ["Anna Scholtz <anna@scholtzan.net>"]
-license = "LGPL"
+license = "LGPL-2.0"
 description = "FluidSynth bindings"
 repository = "https://github.com/scholtzan/rust-fluidsynth"
 
