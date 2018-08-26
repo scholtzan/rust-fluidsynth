@@ -16,16 +16,16 @@ pub mod log;
 pub mod sfont;
 
 pub fn is_soundfont(filename: &str) -> bool {
-    unsafe { 
-        let name = CString::new(filename).unwrap().as_ptr();
-        ffi::fluid_is_soundfont(name) != 0
+    let name = CString::new(filename).unwrap();
+    unsafe {
+        ffi::fluid_is_soundfont(name.as_ptr()) != 0
     }
 }
 
 pub fn is_midifile(filename: &str) -> bool {
+    let name = CString::new(filename).unwrap();
     unsafe { 
-        let name = CString::new(filename).unwrap().as_ptr();
-        ffi::fluid_is_midifile(name) != 0
+        ffi::fluid_is_midifile(name.as_ptr()) != 0
     }
 }
 

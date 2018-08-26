@@ -21,8 +21,9 @@ impl RAMSoundFont {
     }
 
     pub fn set_name(&self, name: &str) -> i32 {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            fluid_ramsfont_set_name(self.to_raw(), CString::new(name).unwrap().as_ptr())
+            fluid_ramsfont_set_name(self.to_raw(), name_str.as_ptr())
         }
     } 
 
@@ -70,8 +71,9 @@ impl RAMSample {
     }
 
     pub fn set_name(&self, name: &str) -> i32 {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            fluid_sample_set_name(self.to_raw(), CString::new(name).unwrap().as_ptr())
+            fluid_sample_set_name(self.to_raw(), name_str.as_ptr())
         }
     }
 

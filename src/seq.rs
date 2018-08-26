@@ -51,13 +51,11 @@ impl Sequencer {
     }
 
     pub fn register_client<T: Fn(u32, Event, Sequencer)>(&self, name: &str, callback: T) -> i16 {
+        let name_str = CString::new(name).unwrap();
         unsafe {
-            // get name
-            let name = CString::new(name).unwrap().as_ptr();
-
             let user_data = &callback as *const _ as *mut c_void;
             
-            return fluid_sequencer_register_client(self.c_fluid_sequencer, name, 
+            return fluid_sequencer_register_client(self.c_fluid_sequencer, name_str.as_ptr(), 
                                                    event_callback_wrapper::<T>, user_data) as i16
         }
 
