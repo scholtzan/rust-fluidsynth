@@ -596,11 +596,8 @@ impl Synth {
         }
     }
     
-    // The fluid_synth_write_* functions are not idiomatic in Rust.
-    // But what functions should we provide instead? We could write into one or 2 &mut [f32],
-    // but then the user would have to pass in initialized data, when uninitialized would work just as well
-    // (or invoke unsafe code).
-    // I (Eli Dupree) have picked this particular alternative, but I'm not confident that it's the best.
+    // The fluid_synth_write_* functions are not idiomatic in Rust. A current approach is to write into &mut [f32],
+    // so the user would have to pass in initialized data.
     pub fn write_f32 (&self, len: usize, left: &mut Vec<f32>, right: &mut Vec<f32>)->bool {
       left.reserve (len);
       right.reserve (len);
@@ -619,9 +616,6 @@ impl Synth {
       }
       result
     }
-
-    // TODO
-    // [...]
 
     pub fn set_midi_router(&self, router: &MidiRouter) {
         unsafe {
