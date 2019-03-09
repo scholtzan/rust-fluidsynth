@@ -48,7 +48,3 @@ fn main() {
     }
 }
 ```
-
-## License
-
-`rust-fluidsynth` uses the same license as FluidSynth: the GNU Lesser General Public License.
